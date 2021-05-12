@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 let songContainerDiv = document.querySelector('#music-album-container')
 let songPlaylist = document.querySelector('#music-playlist')
+=======
+<<<<<<< HEAD
+let songContainerDiv = document.querySelector('div.music-album-container')
+let songPlaylist = document.querySelector('div#music-playlist')
+>>>>>>> 1be93c5e70b873383bd9e12baa8febe38a49bd99
 
 function getAllSongs(){
 fetch("http://localhost:3000/songs")
@@ -50,4 +56,24 @@ fetch("http://localhost:3000/songs")
 getAllSongs()
 
 
+<<<<<<< HEAD
                 
+=======
+//                 oneSongInfo.append(songAlbum, songName, songArtist, songYear)
+//                 songPlaylist.append(oneSongInfo)
+                
+=======
+let songContainerDiv = document.querySelector("div.music-album-container")
+
+fetch('http://localhost:3000/songs')
+.then(res => res.json())
+.then((songArray)=>{
+    songArray.forEach((songObj)=>{
+        let songFrame = document.createElement("iframe")
+        songFrame.src = songObj.songUrl
+
+        songContainerDiv.append(songFrame)
+    })
+})
+>>>>>>> paul
+>>>>>>> 1be93c5e70b873383bd9e12baa8febe38a49bd99
