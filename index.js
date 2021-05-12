@@ -5,18 +5,20 @@ function getAllSongs(){
 fetch('http://localhost:3000/songs')
     .then(response => response.json())
     .then((songsArray) => {
-        console.log(songsArray)
         songsArray.forEach((songsObj) => {
-            let songFrame = document.createElement('iframe')
-                songFrame.src = songsObj.songUrl
+            let 
+            
+            let songName = songsObj.name
+            
+            // let songFrame = document.createElement('iframe')
+            //     songFrame.src = songsObj.songUrl
 
-            let songNameMain = document.createElement('h2')
-            songNameMain = songsObj.name
-
-            songContainerDiv.append(songFrame, songNameMain)
-        
-        songFrame.addEventListener("Click", (e)=>{
-            getOneSong(songsObj)
+            // let songNameMain = document.createElement('h2')
+            // songNameMain = songsObj.name
+            // songContainerDiv.append(songNameMain)
+            
+            // songNameMain.addEventListener("Click", (e)=>{
+            // console.log('Hello');
         })    
         })
     })
