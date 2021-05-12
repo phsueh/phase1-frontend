@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let songContainerDiv = document.querySelector('div.music-album-container')
 let songPlaylist = document.querySelector('div#music-playlist')
 
@@ -57,3 +58,17 @@ function getOneSong(songsObj){
 //                 oneSongInfo.append(songAlbum, songName, songArtist, songYear)
 //                 songPlaylist.append(oneSongInfo)
                 
+=======
+let songContainerDiv = document.querySelector("div.music-album-container")
+
+fetch('http://localhost:3000/songs')
+.then(res => res.json())
+.then((songArray)=>{
+    songArray.forEach((songObj)=>{
+        let songFrame = document.createElement("iframe")
+        songFrame.src = songObj.songUrl
+
+        songContainerDiv.append(songFrame)
+    })
+})
+>>>>>>> paul
