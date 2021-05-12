@@ -49,24 +49,5 @@ fetch("http://localhost:3000/songs")
 }
 getAllSongs()
 
-// function getOneSong(songsObj){
-//     fetch(`http://localhost:3000/songs/${songsObj.id}`)
-//             .then(res=>res.json())
-//             .then((oneSongObj)=>{
-                
-//                 let oneSongInfo = document.createElement('div')
-//                 oneSongInfo.className = "SongInfo"
-//                 oneSongInfo.innerHTMl=`
-//                 <iframe src = "${oneSongObj.songUrl}"/>
-//                 <h2>${oneSongObj.name}</h2>
-//                 <h3>${oneSongObj.artist}</h3>
-//                 <h3>${oneSongObj.year}</3>
-//                 `
-            
-//                 songPlaylist.append(oneSongInfo)
-//             })
-// }
-
-
 
                 
