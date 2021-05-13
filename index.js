@@ -1,5 +1,5 @@
 
-let songContainerDiv = document.querySelector('div.music-album-container')
+let songContainerDiv = document.querySelector('div#music-album-container')
 let songPlaylist = document.querySelector('div#music-playlist')
 
 
@@ -32,13 +32,36 @@ fetch("http://localhost:3000/songs")
                 let songAlbum = document.createElement('iframe')
                 songAlbum.src = songsObj.songUrl
 
-                let songLikes = document.createElement("BUTTON")
-                songLikes.innerHTML = 'likes'
-                songLikes.onclick= function(){
-                    console.log('hello')
-                }
+                // let likesP = document.createElement("p")
+                // likesP.innerText = `${songsObj.likes}` + ' likes'
 
-                songInfoContainer.append(songName, songYear, songArtist, songAlbum, songLikes)
+                let likeButton = document.createElement("button")
+                    likeButton.className = 'likes-button'
+                    likeButton.innerText = `${songsObj.likes}` + ' likes'
+
+                likeButton.addEventListener("click", (e)=>{
+
+                    let currentLikes = songsObj.likes
+                    let newLikes = 1
+                    let totalLikes = currentLikes + newLikes
+
+                    fetch(`http://localhost:3000/songs/${songInfoContainer.dataset.id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-type" : "application/json"
+                        },
+                        body: JSON.stringify({
+                            likes: totalLikes
+                        })
+                    })
+                        .then(res=>res.json())
+                        .then((updatedLikesObj)=>{
+                            console.log(updatedLikesObj)
+                    })
+                    
+                })
+
+                songInfoContainer.append(songName, songYear, songArtist, songAlbum, likeButton)
                 songPlaylist.append(songInfoContainer)
                 
         })    
