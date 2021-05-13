@@ -1,71 +1,73 @@
-let songContainerDiv = document.querySelector('div.music-album-container')
+
+let songContainerDiv = document.querySelector('div#music-album-container')
 let songPlaylist = document.querySelector('div#music-playlist')
 
+
 function getAllSongs(){
-fetch('http://localhost:3000/songs')
+fetch("http://localhost:3000/songs")
     .then(response => response.json())
     .then((songsArray) => {
-        console.log(songsArray)
-        songsArray.forEach((songsObj) => {
-            let songFrame = document.createElement('iframe')
-                songFrame.src = songsObj.songUrl
-
-            let songNameMain = document.createElement('h2')
-            songNameMain = songsObj.name
-
-            songContainerDiv.append(songFrame, songNameMain)
         
-        songFrame.addEventListener("Click", (e)=>{
-            getOneSong(songsObj)
+        songsArray.forEach((songsObj) => {
+            
+            let songNameMain = document.createElement("h2")
+            songNameMain.innerText = songsObj.name
+
+            songContainerDiv.append(songNameMain)
+        
+            songNameMain.addEventListener("click", (evt) => {
+                let songInfoContainer = document.createElement('div')
+                songInfoContainer.ClassName = "SongInfo"
+                songInfoContainer.dataset.id = songsObj.id
+
+                let songName =document.createElement('h2')
+                songName.innerText = songsObj.name
+
+                let songYear = document.createElement('h3')
+                songYear.innerText = songsObj.year
+
+                let songArtist = document.createElement('h3')
+                songArtist.innerText = songsObj.artist
+
+                let songAlbum = document.createElement('iframe')
+                songAlbum.src = songsObj.songUrl
+
+                // let likesP = document.createElement("p")
+                // likesP.innerText = `${songsObj.likes}` + ' likes'
+
+                let likeButton = document.createElement("button")
+                    likeButton.className = 'likes-button'
+                    likeButton.innerText = `${songsObj.likes}` + ' likes'
+
+                likeButton.addEventListener("click", (e)=>{
+
+                    let currentLikes = songsObj.likes
+                    let newLikes = 1
+                    let totalLikes = currentLikes + newLikes
+
+                    fetch(`http://localhost:3000/songs/${songInfoContainer.dataset.id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-type" : "application/json"
+                        },
+                        body: JSON.stringify({
+                            likes: totalLikes
+                        })
+                    })
+                        .then(res=>res.json())
+                        .then((updatedLikesObj)=>{
+                            console.log(updatedLikesObj)
+                    })
+                    
+                })
+
+                songInfoContainer.append(songName, songYear, songArtist, songAlbum, likeButton)
+                songPlaylist.append(songInfoContainer)
+                
         })    
         })
     })
 }
 getAllSongs()
 
-function getOneSong(songsObj){
-    fetch(`http://localhost:3000/songs/${songsObj.id}`)
-            .then(res=>res.json())
-            .then((oneSongObj)=>{
-                
-                let oneSongInfo = document.createElement('div')
-                oneSongInfo.className = "SongInfo"
-                oneSongInfo.innerHTMl=`
-                <iframe src = "${oneSongObj.songUrl}"/>
-                <h2>${oneSongObj.name}</h2>
-                <h3>${oneSongObj.artist}</h3>
-                <h3>${oneSongObj.year}</3>
-                `
-            
-                songPlaylist.append(oneSongInfo)
-            })
-}
 
-
-// let songAlbum = document.createElement('iframe')
-//                 songAlbum.src = oneSongObj.songUrl
-        
-//                 let songName = document.createElement('h2')
-//                 songName.innerText = oneSongObj.name
-        
-//                 let songArtist = document.createElement('h3')
-//                 songArtist.innerText = oneSongObj.artis
-        
-//                 let songYear = document.createElement('h3')
-//                 songYear.innerText = oneSongObj.year
-
-//                 oneSongInfo.append(songAlbum, songName, songArtist, songYear)
-//                 songPlaylist.append(oneSongInfo)
-                
-let songContainerDiv = document.querySelector("div.music-album-container")
-
-fetch('http://localhost:3000/songs')
-.then(res => res.json())
-.then((songArray)=>{
-    songArray.forEach((songObj)=>{
-        let songFrame = document.createElement("iframe")
-        songFrame.src = songObj.songUrl
-
-        songContainerDiv.append(songFrame)
-    })
-})
