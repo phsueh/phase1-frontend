@@ -41,9 +41,8 @@ fetch("http://localhost:3000/songs")
 
                 likeButton.addEventListener("click", (e)=>{
 
-                    let currentLikes = songsObj.likes
-                    let newLikes = 1
-                    let totalLikes = currentLikes + newLikes
+                    let currentLikes = parseInt(likeButton.innerText)
+                        likeButton.innerText = `${currentLikes+1} likes`
 
                     fetch(`http://localhost:3000/songs/${songInfoContainer.dataset.id}`, {
                         method: "PATCH",
@@ -51,12 +50,12 @@ fetch("http://localhost:3000/songs")
                             "Content-type" : "application/json"
                         },
                         body: JSON.stringify({
-                            likes: totalLikes
+                            likes: currentLikes+1
                         })
                     })
                         .then(res=>res.json())
                         .then((updatedLikesObj)=>{
-                            console.log(updatedLikesObj)
+                            console.log(updatedLikesObj.likes)
                     })
                     
                 })
