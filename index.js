@@ -38,6 +38,7 @@ fetch("http://localhost:3000/songs")
                     likeButton.className = 'likes-button'
                     likeButton.innerText = `${songsObj.likes}` + ' likes'
 
+                    console.log(likeButton.innerText)
                 likeButton.addEventListener("click", (e)=>{
 
                     let currentLikes = parseInt(likeButton.innerText)
