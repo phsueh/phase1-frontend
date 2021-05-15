@@ -1,11 +1,62 @@
-#wrapper{
-    display: flex; 
+.wrapper{
     justify-content: center;
     align-items: center;
-    background-color: green;
+    background-color: black;
+    align-items: center;
+    padding: 10px;
 }
 
-.mainText {
+#mainText {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
+    font-size: 18 px;
+    color: white;
+}
+
+#music-album-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orangered;
+    color: black;
+}
+
+#music-album-container span {
+    width: 8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: center;
+    padding: 15px;
+}
+
+#music-playlist {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: white;
+
+}
+
+h7 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+button {
+    background-color: green
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
 }

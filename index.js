@@ -1,4 +1,4 @@
-let songContainerDiv = document.querySelector('div#music-album-container')
+let songContainerDiv = document.querySelector('Div#music-album-container')
 let songPlaylist = document.querySelector('div#music-playlist')
 
 
@@ -9,7 +9,7 @@ fetch("http://localhost:3000/songs")
         
         songsArray.forEach((songsObj) => {
             
-            let songNameMain = document.createElement("h2")
+            let songNameMain = document.createElement("span")
             songNameMain.innerText = songsObj.name
 
             songContainerDiv.append(songNameMain)
@@ -19,13 +19,13 @@ fetch("http://localhost:3000/songs")
                 songInfoContainer.ClassName = "SongInfo"
                 songInfoContainer.dataset.id = songsObj.id
 
-                let songName =document.createElement('h2')
-                songName.innerText = songsObj.name
+                let songName =document.createElement('p')
+                songName.innerText = `"${songsObj.name}"`
 
-                let songYear = document.createElement('h3')
+                let songYear = document.createElement('h7')
                 songYear.innerText = songsObj.year
 
-                let songArtist = document.createElement('h3')
+                let songArtist = document.createElement('p')
                 songArtist.innerText = songsObj.artist
 
                 let songAlbum = document.createElement('iframe')
